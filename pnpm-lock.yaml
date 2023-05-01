@@ -9,6 +9,7 @@ specifiers:
   '@mantine/next': ^6.0.9
   '@prisma/client': ^4.11.0
   '@t3-oss/env-nextjs': ^0.2.1
+  '@tabler/icons-react': ^2.17.0
   '@tanstack/react-query': ^4.28.0
   '@trpc/client': ^10.18.0
   '@trpc/next': ^10.18.0
@@ -45,6 +46,7 @@ dependencies:
   '@mantine/next': 6.0.9_g2zusix7m4gmwipe5aqhd5t7pm
   '@prisma/client': 4.13.0_prisma@4.13.0
   '@t3-oss/env-nextjs': 0.2.2_zod@3.21.4
+  '@tabler/icons-react': 2.17.0_react@18.2.0
   '@tanstack/react-query': 4.29.5_biqbaboplfbrettd7655fr4n2y
   '@trpc/client': 10.23.0_@trpc+server@10.23.0
   '@trpc/next': 10.23.0_bi77pykgdv3umxvf6su2nwgeqm
@@ -824,6 +826,20 @@ packages:
     dependencies:
       '@t3-oss/env-core': 0.2.2_zod@3.21.4
       zod: 3.21.4
+    dev: false
+
+  /@tabler/icons-react/2.17.0_react@18.2.0:
+    resolution: {integrity: sha512-kuEW+qNwRqcK5iMl7qTapzX2NiMOwPg4Az01d+IZ1DIMwaZ7iKPJaIor2ihKFLPYrT9D5BZHXB8R5mSkw0FETg==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tabler/icons': 2.17.0
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
+  /@tabler/icons/2.17.0:
+    resolution: {integrity: sha512-UeJaylOGNRhQKyDlgZfrQ3UPSGlfVQuXcmCsTYeXioKKepibW6VZ3H36Lo1jvBTBkQD2e9m+k2NxwkztOTXwrA==}
     dev: false
 
   /@tanstack/query-core/4.29.5:
@@ -3272,7 +3288,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /punycode/2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
