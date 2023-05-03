@@ -6,7 +6,7 @@ type BaseButtonProps = React.DetailedHTMLProps<
 >; // got this type by hovering over a <button> element and this is what it said
 
 const COLORS = {
-  blue: "bg-blue-900 text-blue-200 saturate-200",
+  blue: "bg-blue-900 text-blue-200",
   cyan: "bg-cyan-600 hover:bg-cyan-500",
   red: "bg-red-600 hover:bg-red-500",
 };
