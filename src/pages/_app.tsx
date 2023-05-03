@@ -2,11 +2,19 @@ import "~/styles/globals.css";
 
 import { api } from "~/utils/api";
 import type { ReactElement, ReactNode } from "react";
-import { MantineProvider } from "@mantine/core";
+import { Inter } from "next/font/google";
 
 import { type NextPage } from "next";
 import { type AppProps } from "next/app";
-import { ClerkProvider } from "@clerk/nextjs";
+import {
+  ClerkProvider,
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+} from "@clerk/nextjs";
+import classNames from "classnames";
+
+const inter = Inter({ subsets: ["latin"] });
 
 /**
  * Use these types if your component uses a layout
@@ -16,6 +24,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 // eslint-disable-next-line
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
+  protected: boolean;
 };
 
 /**
@@ -29,21 +38,26 @@ type AppPropsWithLayout = AppProps & {
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        /** Put your mantine theme override here */
-        colorScheme: "light",
-        // colorScheme: "dark",
-      }}
-    >
-      <ClerkProvider {...pageProps}>
-        {getLayout(<Component {...pageProps} />)}
-      </ClerkProvider>
-    </MantineProvider>
+  const isProtected = Component.protected;
+
+  const toRender = (
+    <main className={classNames(inter.className, "dark:bg-neutral-900")}>
+      {isProtected ? (
+        <>
+          <SignedIn>
+            <Component {...pageProps} />
+          </SignedIn>
+          <SignedOut>
+            <RedirectToSignIn />
+          </SignedOut>
+        </>
+      ) : (
+        <Component {...pageProps} />
+      )}
+    </main>
   );
+
+  return <ClerkProvider {...pageProps}>{getLayout(toRender)}</ClerkProvider>;
 };
 
 export default api.withTRPC(MyApp);
