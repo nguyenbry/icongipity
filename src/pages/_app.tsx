@@ -40,17 +40,16 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   const isProtected = Component.protected;
 
+  const page = <Component {...pageProps} />;
   const toRender = isProtected ? (
     <>
-      <SignedIn>
-        <Component {...pageProps} />
-      </SignedIn>
+      <SignedIn>{page}</SignedIn>
       <SignedOut>
         <RedirectToSignIn />
       </SignedOut>
     </>
   ) : (
-    <Component {...pageProps} />
+    page
   );
 
   return (

@@ -18,5 +18,14 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "homes-santos.s3.amazonaws.com",
+        port: "",
+      },
+    ],
+  },
 };
 export default config;
