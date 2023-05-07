@@ -81,7 +81,7 @@ const GeneratePage: NextPageWithLayout = () => {
             e.preventDefault();
 
             generateMut
-              .mutateAsync({ prompt, nRequested: 3 })
+              .mutateAsync({ prompt, nRequested: 1 })
               .then((jobId) => {
                 void router.push("/jobs/" + jobId);
               })
@@ -114,7 +114,9 @@ const GeneratePage: NextPageWithLayout = () => {
             </div>
           </GenerateFormSection>
 
-          <Button className="ml-auto mt-20">Generate</Button>
+          <div className="flex">
+            <Button className="ml-auto mt-10">Generate</Button>
+          </div>
         </form>
       </div>
     </div>

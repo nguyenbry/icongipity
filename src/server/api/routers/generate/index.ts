@@ -31,6 +31,18 @@ const generateImages = (prompt: string, nRequested: number, userId: string) =>
     user: userId,
   });
 
+const sendNotifToDiscord = (prompt: string) => {
+  return fetch(env.DISCORD_WEBHOOK, {
+    method: "POST",
+    body: JSON.stringify({
+      content: `New job created! \`${prompt}\``,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 export const generateRouter = createTRPCRouter({
   icon: protectedProcedure
     .input(
@@ -41,6 +53,7 @@ export const generateRouter = createTRPCRouter({
     )
     .mutation(
       async ({ input: { nRequested, prompt }, ctx: { userId, prisma } }) => {
+        void sendNotifToDiscord(prompt);
         // generate a job we can update later
         const { id: jobId } = await prisma.job.create({
           data: { nRequested, userId, nCompleted: 0, prompt },

@@ -23,16 +23,15 @@ const runThisOnEveryFrontendRouteRequest = withClerkMiddleware(
       return NextResponse.next();
     }
 
-    console.log(
-      "request",
-      request.nextUrl.pathname,
-      isAPI(request.nextUrl.pathname)
-    );
+    // console.log(
+    //   "request",
+    //   request.nextUrl.pathname,
+    //   isAPI(request.nextUrl.pathname)
+    // );
 
     const isPublicPath = isPublic(request.nextUrl.pathname);
 
     if (isPublicPath) {
-      console.log("allowing access ");
       return NextResponse.next();
     }
     // if the user is not signed in redirect them to the sign in page.

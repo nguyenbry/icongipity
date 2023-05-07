@@ -15,6 +15,7 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: z.string().min(10),
     AWS_REGION: z.string().min(1),
     AWS_BUCKET_NAME: z.string().min(1),
+    DISCORD_WEBHOOK: z.string().url().min(1),
   },
 
   /**
@@ -46,6 +47,7 @@ export const env = createEnv({
     AWS_REGION: process.env.AWS_REGION,
     AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
     NEXT_PUBLIC_AWS_S3_BUCKET_URL: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_URL,
+    DISCORD_WEBHOOK: process.env.DISCORD_WEBHOOK,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
 });

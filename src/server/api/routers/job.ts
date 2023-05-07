@@ -9,8 +9,6 @@ const getImagePathsForJob = async (
   jobId: string,
   userId: string
 ): Promise<string[]> => {
-  console.log("finding images for", userId, jobId);
-
   const result = await s3
     .listObjectsV2({
       Bucket: env.AWS_BUCKET_NAME,
