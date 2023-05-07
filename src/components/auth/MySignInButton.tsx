@@ -1,7 +1,7 @@
 import {
   SignInButton,
-  SignOutButton,
-  SignedIn,
+  // SignOutButton,
+  // SignedIn,
   SignedOut,
 } from "@clerk/nextjs";
 import { Button } from "../atoms/Button";

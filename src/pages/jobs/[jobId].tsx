@@ -1,14 +1,13 @@
 import MainLayout from "~/components/layouts/MainLayout";
 import { type NextPageWithLayout } from "../_app";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { ParsedUrlQuery } from "querystring";
+import { type ParsedUrlQuery } from "querystring";
 import { api } from "~/utils/api";
 import Image from "next/image";
 import { env } from "~/env.mjs";
 
 const JobIdPage: NextPageWithLayout = () => {
-  const { query, isReady, push } = useRouter();
+  const { query, isReady } = useRouter();
 
   const { jobId } = query as ParsedUrlQuery & { jobId?: string };
 
@@ -23,9 +22,12 @@ const JobIdPage: NextPageWithLayout = () => {
   }
 
   if (jobQuery.isSuccess) {
+    // const { prompt } = jobQuery.data;
     return (
-      <>
-        <pre>{JSON.stringify(jobQuery.data, null, 2)}</pre>
+      <div className="flex flex-col px-40 pt-10">
+        <h1 className="text-6xl font-semibold tracking-tighter dark:text-white">
+          Your Icons
+        </h1>
         {jobQuery.data.images.map((image) => (
           <Image
             key={image}
@@ -35,7 +37,7 @@ const JobIdPage: NextPageWithLayout = () => {
             height={512}
           />
         ))}
-      </>
+      </div>
     );
   }
 

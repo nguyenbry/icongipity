@@ -60,7 +60,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className={`${inter.className} flex min-h-screen flex-col dark:bg-neutral-900`}
+        className={`${inter.className} flex min-h-screen flex-col bg-sand dark:bg-neutral-900`}
       >
         <ClerkProvider {...pageProps}>{getLayout(toRender)}</ClerkProvider>
       </div>

@@ -1,6 +1,6 @@
 import MainLayout from "~/components/layouts/MainLayout";
 import { type NextPageWithLayout } from "../_app";
-import { useState, type PropsWithChildren, useEffect } from "react";
+import { useState, type PropsWithChildren } from "react";
 import { Input } from "~/components/atoms/Input";
 import { Button } from "~/components/atoms/Button";
 import { api } from "~/utils/api";
@@ -51,7 +51,7 @@ const ColorSquare: React.FC<{
   return (
     <div
       onClick={onClick}
-      className={`col-span-1 aspect-square cursor-pointer rounded-md  ring-1 ring-white ring-offset-4 ring-offset-neutral-900 ${COLOR_MAP[color]}`}
+      className={`col-span-1 aspect-square w-20 cursor-pointer rounded-md ring-1  ring-white ring-offset-4 ring-offset-neutral-900 md:w-32 ${COLOR_MAP[color]}`}
     ></div>
   );
 };
@@ -63,8 +63,8 @@ const GeneratePage: NextPageWithLayout = () => {
   const router = useRouter();
 
   return (
-    <div className="mt-10 px-72 dark:text-white">
-      <h1 className="text-2xl font-semibold tracking-tighter">
+    <div className="mt-10 px-4 dark:text-white xl:px-72">
+      <h1 className="text-2xl font-bold tracking-tighter">
         Let&apos;s Generate Your Icon
       </h1>
       {/* <Image
@@ -75,13 +75,13 @@ const GeneratePage: NextPageWithLayout = () => {
         width={1024}
         height={1024}
       /> */}
-      <div className="flex flex-col gap-2 rounded-xl p-10">
+      <div className="flex flex-col gap-2 rounded-xl py-10 xl:px-10">
         <form
           onSubmit={(e) => {
             e.preventDefault();
 
             generateMut
-              .mutateAsync({ prompt, nRequested: 1 })
+              .mutateAsync({ prompt, nRequested: 3 })
               .then((jobId) => {
                 void router.push("/jobs/" + jobId);
               })
@@ -104,7 +104,7 @@ const GeneratePage: NextPageWithLayout = () => {
             header="Choose a primary color for your icon"
             number={2}
           >
-            <div className="grid grid-cols-12 gap-6">
+            <div className="flex flex-wrap gap-6">
               {Object.keys(COLOR_MAP).map((color) => (
                 <ColorSquare
                   key={color}

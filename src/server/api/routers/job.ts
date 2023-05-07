@@ -3,6 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import s3, { BUCKET_PREFIX } from "~/server/s3";
 import { env } from "~/env.mjs";
+import { type Job } from "@prisma/client";
 
 const getImagePathsForJob = async (
   jobId: string,
@@ -31,6 +32,11 @@ const getImagePathsForJob = async (
   return paths;
 };
 
+const appendImagesArrayToJob = async (job: Job, uid: string) => {
+  const images = await getImagePathsForJob(job.id, uid);
+  return { ...job, images };
+};
+
 export const jobRouter = createTRPCRouter({
   get: protectedProcedure
     .input(z.string())
@@ -44,8 +50,16 @@ export const jobRouter = createTRPCRouter({
         });
       }
 
-      const images = await getImagePathsForJob(jobId, userId);
-      const out = { ...job, images };
-      return out;
+      return await appendImagesArrayToJob(job, userId);
     }),
+
+  getAll: protectedProcedure.query(async ({ ctx: { prisma, userId } }) => {
+    const jobs = await prisma.job.findMany({
+      where: { userId },
+      orderBy: [{ createdAt: "desc" }],
+    });
+
+    const out = jobs.map((j) => appendImagesArrayToJob(j, userId));
+    return await Promise.all(out);
+  }),
 });

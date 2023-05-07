@@ -11,7 +11,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     <input
       ref={ref}
       {...rest}
-      className={`h-12 w-full rounded-xl border border-neutral-300 bg-transparent px-5 text-sm ring-teal-300 ring-offset-8 focus:outline-none focus:ring-2 dark:ring-offset-neutral-900 ${
+      className={`h-12 w-full rounded-xl border border-black bg-transparent px-5 text-sm ring-black ring-offset-8 ring-offset-sand focus:outline-none focus:ring-2 dark:border-neutral-300 dark:ring-sand dark:ring-offset-neutral-900 ${
         className ?? ""
       }`}
     />
