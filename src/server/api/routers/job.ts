@@ -40,8 +40,9 @@ export const jobRouter = createTRPCRouter({
     .input(z.string())
     .query(async ({ input: jobId, ctx: { prisma, userId } }) => {
       const job = await prisma.job.findUnique({ where: { id: jobId } });
+      console.log("job found", job);
 
-      if (!job || job.userId !== userId) {
+      if (!job || job.userId !== userId || job.nCompleted === 0) {
         throw new TRPCError({
           code: "NOT_FOUND",
           message: "Job not found",
@@ -53,7 +54,7 @@ export const jobRouter = createTRPCRouter({
 
   getAll: protectedProcedure.query(async ({ ctx: { prisma, userId } }) => {
     const jobs = await prisma.job.findMany({
-      where: { userId },
+      where: { userId, nCompleted: { gt: 0 } }, // only show jobs with at least one completed image (new tasks have default nCompleted = 0)
       orderBy: [{ createdAt: "desc" }],
     });
 

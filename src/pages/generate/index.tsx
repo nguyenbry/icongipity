@@ -4,7 +4,6 @@ import { useState, type PropsWithChildren } from "react";
 import { Input } from "~/components/atoms/Input";
 import { Button } from "~/components/atoms/Button";
 import { api } from "~/utils/api";
-// import Image from "next/image";
 import { useRouter } from "next/router";
 
 const GenerateFormSection: React.FC<
@@ -52,12 +51,12 @@ const ColorSquare: React.FC<{
     <div
       onClick={onClick}
       className={`col-span-1 aspect-square w-20 cursor-pointer rounded-md ring-1  ring-white ring-offset-4 ring-offset-neutral-900 md:w-32 ${COLOR_MAP[color]}`}
-    ></div>
+    />
   );
 };
 
 const GeneratePage: NextPageWithLayout = () => {
-  const [prompt, setPrompt] = useState("");
+  const [noun, setNoun] = useState("");
   const generateMut = api.generate.icon.useMutation();
 
   const router = useRouter();
@@ -65,23 +64,20 @@ const GeneratePage: NextPageWithLayout = () => {
   return (
     <div className="mt-10 px-4 dark:text-white xl:px-72">
       <h1 className="text-2xl font-bold tracking-tighter">
-        Let&apos;s Generate Your Icon
+        Let&apos;s Generate Your Object
       </h1>
-      {/* <Image
-        alt="icon"
-        src={
-          "https://oaidalleapiprodscus.blob.core.windows.net/private/org-CyreJ9k6aOKyaJ1P0aBkd09r/user-dsFP52F2aNyNLhoRgw5Zg5jR/img-8YRzQsQaNKWH9ohK8j79qSkD.png?st=2023-05-03T23%3A25%3A59Z&se=2023-05-04T01%3A25%3A59Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-03T12%3A06%3A25Z&ske=2023-05-04T12%3A06%3A25Z&sks=b&skv=2021-08-06&sig=4NVUoaPkkMPrjLm9luxayVcdoL1GZxtz83O6zyFBrz8%3D"
-        }
-        width={1024}
-        height={1024}
-      /> */}
       <div className="flex flex-col gap-2 rounded-xl py-10 xl:px-10">
         <form
           onSubmit={(e) => {
             e.preventDefault();
 
             generateMut
-              .mutateAsync({ prompt, nRequested: 1 })
+              .mutateAsync({
+                noun,
+                nRequested: 1,
+                color: "blue",
+                type: "GLOWING_POLY",
+              })
               .then((jobId) => {
                 void router.push("/jobs/" + jobId);
               })
@@ -91,17 +87,17 @@ const GeneratePage: NextPageWithLayout = () => {
           }}
         >
           <GenerateFormSection
-            header="Describe your icon using a noun and adjective"
+            header="Describe your object using a noun and adjective"
             number={1}
           >
             <Input
               placeholder="An angry dog"
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
+              value={noun}
+              onChange={(e) => setNoun(e.target.value)}
             />
           </GenerateFormSection>
           <GenerateFormSection
-            header="Choose a primary color for your icon"
+            header="Choose a primary color for your object"
             number={2}
           >
             <div className="flex flex-wrap gap-6">

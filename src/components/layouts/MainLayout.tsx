@@ -7,29 +7,37 @@ import { IconMoodSmileBeam } from "@tabler/icons-react";
 
 type GetLayoutFn = NonNullable<NextPageWithLayout["getLayout"]>;
 
-const MainLayout: GetLayoutFn = (page) => (
-  <>
-    <nav className="sticky top-0 z-10 flex items-center justify-between px-10 py-12 backdrop-blur-md lg:px-20 2xl:px-72">
-      <div className="flex items-center gap-3">
-        <Link href={"/"}>
-          <h1 className="cursor-pointer bg-gradient-to-r from-blue-500 to-violet-600 bg-clip-text text-3xl font-semibold tracking-tighter text-transparent transition-transform hover:translate-x-2">
-            Icon GiPiTy
-          </h1>
-        </Link>
-        <IconMoodSmileBeam className="animate-spin dark:text-white" />
-      </div>
+const MainLayout: GetLayoutFn = (page) => {
+  return (
+    <>
+      <nav
+        style={{
+          paddingTop: "3rem",
+          paddingBottom: "3rem",
+        }}
+        className="sticky top-0 z-10 flex items-center justify-between px-10 backdrop-blur-md lg:px-20 2xl:px-72"
+      >
+        <div className="flex items-center gap-3">
+          <Link href={"/"}>
+            <h1 className="cursor-pointer bg-gradient-to-r from-blue-500 to-violet-600 bg-clip-text text-3xl font-semibold tracking-tighter text-transparent transition-transform hover:translate-x-2">
+              Object GiPiTy
+            </h1>
+          </Link>
+          <IconMoodSmileBeam className="animate-spin dark:text-white" />
+        </div>
 
-      <div className="flex gap-3">
-        <Link href={"/jobs"}>
-          <Button color="transparent">My Icons</Button>
-        </Link>
+        <div className="flex gap-3">
+          <Link href={"/jobs"}>
+            <Button color="transparent">My Objects</Button>
+          </Link>
 
-        <MySignOutButton />
-        <MySignInButton />
-      </div>
-    </nav>
-    <main className="flex grow flex-col">{page}</main>
-  </>
-);
+          <MySignOutButton />
+          <MySignInButton />
+        </div>
+      </nav>
+      <main className="flex grow flex-col">{page}</main>
+    </>
+  );
+};
 
 export default MainLayout;
