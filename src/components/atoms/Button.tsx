@@ -17,7 +17,7 @@ export const Button = forwardRef<
     <button
       ref={ref}
       {...rest}
-      className={`max-w-min whitespace-nowrap rounded-lg px-[1.4rem] py-2 text-sm font-semibold shadow-sm transition-all hover:shadow-lg active:scale-95 active:opacity-50 ${
+      className={`max-w-min whitespace-nowrap rounded-lg px-4 py-[0.4rem] text-xs font-semibold shadow-sm transition-all hover:shadow-lg active:scale-95 active:opacity-50 md:px-[1.4rem] md:py-2 md:text-sm ${
         COLORS[color ?? "blue"]
       } ${className ?? ""}`}
     >

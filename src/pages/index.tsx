@@ -30,8 +30,8 @@ const Home: NextPageWithLayout = () => {
       </h2>
       <div className="flex justify-center gap-3">
         <HomeButton />
-        <Button color="transparent" className="inline-flex gap-1">
-          <IconInfoCircle className="inline" size={20} />
+        <Button color="transparent" className="inline-flex items-center gap-2">
+          <IconInfoCircle className="inline h-4 w-4" />
           <span>Learn More</span>
         </Button>
       </div>

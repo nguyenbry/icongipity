@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
     <nav className="sticky top-0 flex items-center justify-between px-6 py-4 backdrop-blur-md md:py-10 lg:px-20 2xl:px-72">
       <div className="flex items-center gap-3">
         <Link href={"/"}>
-          <h1 className="cursor-pointer bg-gradient-to-r from-blue-500 to-violet-600 bg-clip-text text-3xl font-semibold tracking-tighter text-transparent transition-transform hover:translate-x-2">
+          <h1 className="cursor-pointer bg-gradient-to-r from-blue-500 to-violet-600 bg-clip-text text-xl font-semibold tracking-tighter text-transparent transition-transform hover:translate-x-2 md:text-3xl">
             Object GiPiTy
           </h1>
         </Link>
