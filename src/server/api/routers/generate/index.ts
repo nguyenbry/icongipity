@@ -2,10 +2,16 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { openai } from "~/server/openai";
-import s3, { BUCKET_PREFIX } from "~/server/s3";
+import s3, { BUCKET_PREFIX, getImagePathsForKey } from "~/server/s3";
 import { v4 as uuidv4 } from "uuid";
 import { env } from "~/env.mjs";
-import { PromptGenMap, PromptType } from "./utils";
+import {
+  Color,
+  PromptGenMap,
+  PromptType,
+  PromptTypeToLabelMap,
+  cleanPrompt,
+} from "./utils";
 
 const uploadImage = async (userId: string, jobId: string, imageB64: string) => {
   const imageId = uuidv4();
@@ -49,16 +55,18 @@ export const generateRouter = createTRPCRouter({
       z.object({
         noun: z.string(),
         nRequested: z.number().int().min(1).max(10),
-        type: PromptType,
-        color: z.string(),
+        style: PromptType,
+        color: Color,
       })
     )
     .mutation(
       async ({
-        input: { nRequested, noun, type, color },
+        input: { nRequested, noun, style, color },
         ctx: { userId, prisma },
       }) => {
-        const prompt = PromptGenMap[type](noun, color);
+        const cleanedNoun = cleanPrompt(noun);
+        const prompt = PromptGenMap[style](cleanedNoun, color);
+        // const prompt = noun;
 
         await sendNotifToDiscord(prompt);
 
@@ -81,7 +89,13 @@ export const generateRouter = createTRPCRouter({
         // generate a job we can update later
         const { id: jobId, deleteJob } = await prisma.job
           .create({
-            data: { nRequested, userId, nCompleted: 0, prompt: prompt },
+            data: {
+              nRequested,
+              userId,
+              nCompleted: 0,
+              prompt: cleanedNoun,
+              style,
+            },
           })
           .then((job) => ({
             id: job.id,
@@ -115,4 +129,38 @@ export const generateRouter = createTRPCRouter({
         return jobId;
       }
     ),
+  styleOptions: protectedProcedure
+    .output(
+      z
+        .object({
+          type: PromptType,
+          url: z.string(),
+          label: z.string(),
+        })
+        .array()
+    )
+    .query(async () => {
+      const images = await getImagePathsForKey(`${BUCKET_PREFIX}/static/`);
+
+      return images.map((url: string) => {
+        const parts = url.split("/");
+        const type = parts[parts.length - 1];
+
+        if (!type) {
+          throw new Error("Invalid image path");
+        }
+        const promptType = type.split(".")[0];
+
+        if (!promptType) {
+          throw new Error("Invalid image path");
+        }
+
+        const type_ = PromptType.parse(promptType);
+        return {
+          type: type_,
+          url,
+          label: PromptTypeToLabelMap[type_],
+        };
+      });
+    }),
 });

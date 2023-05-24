@@ -24,4 +24,12 @@ model Job {
     nRequested Int
     nCompleted Int
     prompt     String
+    style      Style
+}
+
+enum Style {
+    GLOWING_POLY
+    VECTOR_DIGITAL
+    EMOJI
+    METALLIC
 }

@@ -26,7 +26,7 @@ const Home: NextPageWithLayout = () => {
   return (
     <div className="mt-[15dvh] grid place-content-center gap-40 md:mt-[20dvh] lg:mt-[28dvh] lg:gap-12">
       <h2 className="leading-12 white text-center text-7xl font-black tracking-tighter dark:text-white lg:text-8xl">
-        AI-generated icons
+        AI-generated objects
       </h2>
       <div className="flex justify-center gap-3">
         <HomeButton />

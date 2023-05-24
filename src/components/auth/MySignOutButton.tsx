@@ -6,7 +6,9 @@ const MySignOutButton: React.FC = () => {
   return (
     <SignedIn>
       <SignOutButton>
-        <Button color="red">Sign Out</Button>
+        <Button color="red" className="hidden md:inline">
+          Sign Out
+        </Button>
       </SignOutButton>
     </SignedIn>
   );

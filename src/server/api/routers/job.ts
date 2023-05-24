@@ -1,33 +1,12 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
-import s3, { BUCKET_PREFIX } from "~/server/s3";
-import { env } from "~/env.mjs";
+import { BUCKET_PREFIX } from "~/server/s3";
 import { type Job } from "@prisma/client";
+import { getImagePathsForKey } from "~/server/s3";
 
-const getImagePathsForJob = async (
-  jobId: string,
-  userId: string
-): Promise<string[]> => {
-  const result = await s3
-    .listObjectsV2({
-      Bucket: env.AWS_BUCKET_NAME,
-      Prefix: `${BUCKET_PREFIX}/${userId}/${jobId}`,
-    })
-    .promise();
-
-  if (!result.Contents) {
-    throw new Error("AWS images do not exist");
-  }
-
-  const paths: string[] = [];
-
-  result.Contents.forEach((c) => {
-    if (!c.Key) throw new Error("AWS image has invalid link");
-    paths.push(`/${c.Key}`);
-  });
-
-  return paths;
+const getImagePathsForJob = async (jobId: string, userId: string) => {
+  return await getImagePathsForKey(`${BUCKET_PREFIX}/${userId}/${jobId}`);
 };
 
 const appendImagesArrayToJob = async (job: Job, uid: string) => {

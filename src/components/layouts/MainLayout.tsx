@@ -1,40 +1,10 @@
 import { type NextPageWithLayout } from "~/pages/_app";
-import MySignOutButton from "../auth/MySignOutButton";
-import MySignInButton from "../auth/MySignInButton";
-import Link from "next/link";
-import { Button } from "../atoms/Button";
-import { IconMoodSmileBeam } from "@tabler/icons-react";
+import { Navbar } from "../nav/navbar";
 
-type GetLayoutFn = NonNullable<NextPageWithLayout["getLayout"]>;
-
-const MainLayout: GetLayoutFn = (page) => {
+const MainLayout: NonNullable<NextPageWithLayout["getLayout"]> = (page) => {
   return (
     <>
-      <nav
-        style={{
-          paddingTop: "3rem",
-          paddingBottom: "3rem",
-        }}
-        className="sticky top-0 z-10 flex items-center justify-between px-10 backdrop-blur-md lg:px-20 2xl:px-72"
-      >
-        <div className="flex items-center gap-3">
-          <Link href={"/"}>
-            <h1 className="cursor-pointer bg-gradient-to-r from-blue-500 to-violet-600 bg-clip-text text-3xl font-semibold tracking-tighter text-transparent transition-transform hover:translate-x-2">
-              Object GiPiTy
-            </h1>
-          </Link>
-          <IconMoodSmileBeam className="animate-spin dark:text-white" />
-        </div>
-
-        <div className="flex gap-3">
-          <Link href={"/jobs"}>
-            <Button color="transparent">My Objects</Button>
-          </Link>
-
-          <MySignOutButton />
-          <MySignInButton />
-        </div>
-      </nav>
+      <Navbar />
       <main className="flex grow flex-col">{page}</main>
     </>
   );
