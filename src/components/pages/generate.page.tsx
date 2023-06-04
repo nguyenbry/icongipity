@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 import { type Color, ColorSelect } from "~/components/generate/color-select";
 import { type Style, StyleSelect } from "~/components/generate/style-select";
+import { MyToast } from "../toast";
 
 const GenerateFormSection: React.FC<
   PropsWithChildren<{ header: string; number: number }>
@@ -32,6 +33,8 @@ const GenerateFormSection: React.FC<
 };
 
 const GeneratePage: NextPageWithLayout = () => {
+  const [open, setOpen] = useState(false);
+
   const [noun, setNoun] = useState("");
   const [selectedColor1, setSelectedColor1] = useState<Color>();
   const [selectedStyle, setSelectedStyle] = useState<Style>();
@@ -88,11 +91,24 @@ const GeneratePage: NextPageWithLayout = () => {
         </GenerateFormSection>
 
         <div className="flex">
-          <Button className="ml-auto mt-10 min-w-full md:min-w-0">
+          <Button
+            className="ml-auto mt-10 min-w-full md:min-w-0"
+            variant="success"
+          >
             Generate
           </Button>
         </div>
+
+        <Button
+          className="ml-auto mt-10 min-w-full md:min-w-0"
+          type="button"
+          variant="success"
+          onClick={() => setOpen((v) => !v)}
+        >
+          Generate
+        </Button>
       </form>
+      <MyToast isOpen={open} setIsOpen={setOpen} />
     </div>
   );
 };

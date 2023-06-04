@@ -1,5 +1,5 @@
 import "~/styles/globals.css";
-
+import { ThemeProvider } from "next-themes";
 import { api } from "~/utils/api";
 import { Inter } from "next/font/google";
 import { Provider as ToastProvider } from "@radix-ui/react-toast";
@@ -47,11 +47,17 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
         <meta name="description" content="AI-generated objects" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ToastProvider swipeDirection="right">
-        <div className={`${inter.className} flex min-h-screen flex-col`}>
-          <ClerkProvider {...pageProps}>{getLayout(toRender)}</ClerkProvider>
-        </div>
-      </ToastProvider>
+      <ThemeProvider
+        attribute="class"
+        value={{ dark: "dark-theme" }}
+        storageKey="gipity-theme"
+      >
+        <ToastProvider swipeDirection="right">
+          <div className={`${inter.className} flex min-h-screen flex-col`}>
+            <ClerkProvider {...pageProps}>{getLayout(toRender)}</ClerkProvider>
+          </div>
+        </ToastProvider>
+      </ThemeProvider>
     </>
   );
 };

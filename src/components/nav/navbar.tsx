@@ -10,14 +10,14 @@ import classNames from "classnames";
 
 export const Navbar: React.FC = () => {
   return (
-    <nav className="sticky top-0 z-[1] flex items-center justify-between px-6 py-4 backdrop-blur-md md:py-10 lg:px-20 2xl:px-72">
+    <nav className="sticky top-0 z-[1] mb-4 flex items-center justify-between px-6 py-4 backdrop-blur-md transition-spacing lg:px-20 2xl:px-72">
       <div className="flex items-center gap-3">
         <Link href={"/"}>
           <h1 className="cursor-pointer bg-gradient-to-r from-blue-500 to-violet-600 bg-clip-text text-xl font-semibold tracking-tighter text-transparent transition-transform hover:translate-x-2 md:text-3xl">
             Object GiPiTy
           </h1>
         </Link>
-        <IconMoodSmileBeam className="animate-spin dark:text-white" />
+        <IconMoodSmileBeam className="animate-spin dark:text-blue-400" />
       </div>
 
       <div className="flex">
@@ -30,7 +30,7 @@ export const Navbar: React.FC = () => {
                 "mr-2": i === links.length - 1,
               })}
             >
-              <Button color="transparent">{label}</Button>
+              <Button variant="transparent">{label}</Button>
             </Link>
           ))}
           <Hambuger />

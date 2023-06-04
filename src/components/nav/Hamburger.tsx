@@ -9,12 +9,21 @@ import { IconLogout, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import { links } from "./nav-links";
 import { SignOutButton, SignedIn } from "@clerk/nextjs";
+import { Button } from "../atoms/Button";
+import classNames from "classnames";
 
-const MyDropdownItem: React.FC<React.PropsWithChildren> = ({ children }) => {
+const MyDropdownItem: React.FC<
+  React.PropsWithChildren<{ className?: string }>
+> = (props) => {
+  const { className, ...rest } = props;
   return (
-    <Item className="rounded-md py-2 text-center text-xs font-semibold text-slate-400 outline-none transition hover:bg-neutral-700">
-      {children}
-    </Item>
+    <Item
+      className={classNames(
+        "rounded-md py-2 text-center text-sm font-semibold text-xindigo-11 outline-none transition hover:bg-xindigo-3 active:scale-95 active:opacity-60",
+        className
+      )}
+      {...rest}
+    />
   );
 };
 
@@ -22,12 +31,12 @@ export const Hambuger: React.FC = () => {
   return (
     <Root>
       <Trigger asChild className="md:hidden">
-        <button className="dark:text-white">
+        <Button variant="transparent" className="px-0">
           <IconMenu2 />
-        </button>
+        </Button>
       </Trigger>
       <Portal>
-        <Content className="mr-2 mt-8 min-w-[220px] rounded-md border border-neutral-700 bg-neutral-950 p-2 md:hidden">
+        <Content className="z-[2] mr-2 min-w-[280px] rounded-md border border-xindigo-6 bg-xindigo-2 p-2 md:hidden">
           {links.map(({ label, url }) => {
             // item has to go inside of link after some trial and error
             return (
@@ -37,9 +46,9 @@ export const Hambuger: React.FC = () => {
             );
           })}
           <SignedIn>
-            <MyDropdownItem>
+            <MyDropdownItem className="relative mt-5 before:absolute before:left-[5%] before:top-[-10px] before:w-[90%] before:border-b before:border-xindigo-6">
               <SignOutButton>
-                <IconLogout className="mx-auto h-4 w-4" />
+                <IconLogout className="mx-auto h-4 w-4 text-xred-9" />
               </SignOutButton>
             </MyDropdownItem>
           </SignedIn>

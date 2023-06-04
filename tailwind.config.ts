@@ -1,10 +1,19 @@
 import { type Config } from "tailwindcss";
 
 export default {
+  darkMode: ["class", ".dark-theme"],
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      transitionProperty: {
+        height: "height",
+        spacing: "margin, padding",
+      },
       colors: {
+        xindigo: generateRadixColorScale("indigo"),
+        xred: generateRadixColorScale("red"),
+        xmint: generateRadixColorScale("mint"),
+        xslate: generateRadixColorScale("slate"),
         tequila: {
           "50": "#fff6ed",
           "100": "#ffe7cd",
@@ -23,3 +32,27 @@ export default {
   },
   plugins: [],
 } satisfies Config;
+
+type RadixColorScale = {
+  1: string;
+  2: string;
+  3: string;
+  4: string;
+  5: string;
+  6: string;
+  7: string;
+  8: string;
+  9: string;
+  10: string;
+  11: string;
+  12: string;
+};
+
+function generateRadixColorScale(name: string) {
+  const scale = Array.from({ length: 12 }, (_, i) => {
+    const id = i + 1;
+    return [id, `var(--${name}${id})`];
+  });
+
+  return Object.fromEntries(scale) as RadixColorScale;
+}

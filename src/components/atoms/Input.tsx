@@ -2,18 +2,17 @@ import React, { forwardRef } from "react";
 
 export type InputProps = React.ComponentProps<"input">;
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  props,
-  ref
-) {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { className, ...rest } = props;
   return (
     <input
       ref={ref}
       {...rest}
-      className={`h-12 w-full rounded-xl border border-black bg-transparent px-5 text-sm ring-black ring-offset-8 ring-offset-tequila-100 focus:outline-none focus:ring-2 dark:border-neutral-300 dark:ring-tequila-100 dark:ring-offset-neutral-900 ${
+      className={`h-12 w-full rounded-xl border border-xindigo-7 bg-transparent px-5 text-sm ring-xindigo-9 ring-offset-4 ring-offset-xindigo-2 hover:border-xindigo-8 focus:outline-none focus:ring-2 ${
         className ?? ""
       }`}
     />
   );
 });
+
+Input.displayName = "Input";
