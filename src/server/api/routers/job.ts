@@ -19,8 +19,6 @@ export const jobRouter = createTRPCRouter({
     .input(z.string())
     .query(async ({ input: jobId, ctx: { prisma, userId } }) => {
       const job = await prisma.job.findUnique({ where: { id: jobId } });
-      console.log("job found", job);
-
       if (!job || job.userId !== userId || job.nCompleted === 0) {
         throw new TRPCError({
           code: "NOT_FOUND",

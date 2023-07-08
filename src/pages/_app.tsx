@@ -1,3 +1,4 @@
+import { Viewport } from "@radix-ui/react-toast";
 import "~/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import { api } from "~/utils/api";
@@ -12,6 +13,7 @@ import {
 } from "@clerk/nextjs";
 import Head from "next/head";
 import type { NextPageWithLayout } from "~/types/NextPageWithLayout";
+import { AllToasts } from "~/components/toast/all-toasts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,6 +58,8 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
           <div className={`${inter.className} flex min-h-screen flex-col`}>
             <ClerkProvider {...pageProps}>{getLayout(toRender)}</ClerkProvider>
           </div>
+          <Viewport className="fixed left-0 right-0 top-4 z-[3] flex flex-col gap-2 px-4 md:bottom-4 md:right-auto md:top-auto" />
+          <AllToasts />
         </ToastProvider>
       </ThemeProvider>
     </>

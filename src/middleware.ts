@@ -23,12 +23,6 @@ const runThisOnEveryFrontendRouteRequest = withClerkMiddleware(
       return NextResponse.next();
     }
 
-    // console.log(
-    //   "request",
-    //   request.nextUrl.pathname,
-    //   isAPI(request.nextUrl.pathname)
-    // );
-
     const isPublicPath = isPublic(request.nextUrl.pathname);
 
     if (isPublicPath) {

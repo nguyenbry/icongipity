@@ -24,19 +24,22 @@ const SingleJobPage: NextPageWithLayout = () => {
   if (jobQuery.isSuccess) {
     // const { prompt } = jobQuery.data;
     return (
-      <div className="flex flex-col px-40 pt-10">
-        <h1 className="text-6xl font-semibold tracking-tighter dark:text-white">
-          Your Icons
+      <div className="flex w-full flex-col px-4 py-10 lg:px-40">
+        <h1 className="relative text-6xl font-black tracking-tighter dark:text-white">
+          {jobQuery.data.prompt}
         </h1>
-        {jobQuery.data.images.map((image) => (
-          <Image
-            key={image}
-            alt="icon"
-            src={env.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
-            width={512}
-            height={512}
-          />
-        ))}
+        <div className="mt-24 flex flex-wrap justify-center">
+          {jobQuery.data.images.map((image) => (
+            <Image
+              key={image}
+              alt="icon"
+              className="m-10 rounded-xl ring-2 ring-black ring-offset-4 transition-all dark:ring-slate-700 dark:ring-offset-neutral-900"
+              src={env.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
+              width={350}
+              height={350}
+            />
+          ))}
+        </div>
       </div>
     );
   }

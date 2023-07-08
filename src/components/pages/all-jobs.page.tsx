@@ -83,7 +83,7 @@ const AllJobs: NextPageWithLayout = () => {
   const jobs = allJobsQuery.data;
 
   return (
-    <div className="mb-32 flex grow flex-col gap-8 dark:text-neutral-500 xl:px-40">
+    <div className="mb-32 flex w-full flex-col gap-8 dark:text-neutral-500 xl:px-40">
       <div className="flex items-center justify-between px-8">
         <YourObjectsHeader />
 

@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { type VariantProps, cva } from "class-variance-authority";
 
 const buttonVariants = cva(
-  "inline-flex justify-center border whitespace-nowrap rounded-lg text-xs font-semibold transition-all active:scale-95 active:opacity-50",
+  "inline-flex justify-center border whitespace-nowrap rounded-lg text-xs font-semibold transition-all active:scale-95 active:opacity-50 disabled:opacity-50 disabled:cursor-not-allowed",
   {
     variants: {
       variant: {

@@ -102,7 +102,6 @@ export const generateRouter = createTRPCRouter({
             deleteJob: () => prisma.job.delete({ where: { id: job.id } }),
           }));
 
-        console.log("new jobid", jobId);
         if (response.data.created === 0) {
           await deleteJob(); // delete the job if no images were uploaded
           throw getErr();
@@ -117,8 +116,6 @@ export const generateRouter = createTRPCRouter({
         const nCompleted = results.filter(
           (x) => x.status === "fulfilled"
         ).length;
-
-        console.log("completed", nCompleted);
 
         if (nCompleted === 0) {
           await deleteJob(); // delete the job if no images were uploaded
