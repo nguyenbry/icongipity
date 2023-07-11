@@ -1,28 +1,26 @@
-# Create T3 App
+# Object GiPiTy
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This is a generative-art app that is powered by OpenAI. You sign up, give it some prompts, select a few options, and get back generated images for your "object".
 
-## What's next? How do I make an app with this?
+The app is fully typesafe and provides an unmatched developer experience.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Technologies
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- OpenAI DALLE2
+- AWS S3
+- Typescript
+- Shadcn UI (a component library, but you dont have to cry trying to customize things)
+- tRPC
+- Clerk (authentication provider)
+- Planetscale (managed MySQL)
+- Prisma (typesafe db queries)
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Motivation
 
-## Learn More
+As of late, it's hard to go on Twitter and not see something related to AI. I wanted to make a project that uses at least a little bit of it, so I came up with this very simple idea to generate "objects" after seeing [this](https://twitter.com/0xCharlota/status/1543868135861805056) tweet. On top of this, the web dev space is growing quickly and there are tons of packages out that provide insanely great developer experience.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+I wanted to combine a few of favorite technologies and do something cool. Not having to roll your own authentication by using Clerk lets you set up auth in minutes. Syncing your database schema with Prisma means you get typesafe data. Add tRPC to the mix and now your frontend can also see and your data typings. It's hard to beat.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Gotcha
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+If you want to clone this repo and deploy it to Vercel, you probably need the Pro plan. The reason being that the route that handles generating the image then storing it in AWS takes a little long, as you can imagine. Vercel times out any serverless invokations after 10 seconds, but you get a little bit more time with the Pro plan. Deploying the project as standalone probably will not suffer from this issue.
