@@ -1,6 +1,6 @@
 import { type NextPageWithLayout } from "~/types/next-page-with-layout";
 import { SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
-import { Button } from "~/components/atoms/button";
+import { Button } from "~/components/atoms/my-button";
 import { IconInfoCircle } from "@tabler/icons-react";
 import MainLayout from "~/components/layouts/main-layout";
 import Link from "next/link";

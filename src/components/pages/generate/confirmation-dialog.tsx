@@ -1,7 +1,7 @@
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
-import { Button } from "~/components/atoms/button";
+import { Button } from "~/components/atoms/my-button";
 import {
   Dialog,
   DialogContent,

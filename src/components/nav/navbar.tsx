@@ -1,7 +1,7 @@
 import { SignedIn } from "@clerk/nextjs";
 import { IconMoodSmileBeam } from "@tabler/icons-react";
 import Link from "next/link";
-import { Button } from "../atoms/button";
+import { Button } from "../atoms/my-button";
 import { Hambuger } from "./hamburger";
 import MySignOutButton from "../auth/sign-out-button";
 import MySignInButton from "../auth/sign-in-button";
