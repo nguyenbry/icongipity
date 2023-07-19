@@ -9,7 +9,7 @@ import { IconLogout, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import { links } from "./nav-links";
 import { SignOutButton, SignedIn } from "@clerk/nextjs";
-import { Button } from "../atoms/my-button";
+import { Button } from "../atoms/button";
 import classNames from "classnames";
 
 const MyDropdownItem: React.FC<

@@ -1,7 +1,7 @@
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
-import { Button } from "~/components/atoms/my-button";
+import { Button } from "~/components/atoms/button";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "~/components/atoms/my-dialog";
+} from "~/components/atoms/dialog";
 import { type Color } from "~/components/generate/color-select";
 import { type Style } from "~/components/generate/style-select";
 import { addToast, useToastStore } from "~/components/toast/use-toast-store";

@@ -1,7 +1,7 @@
 import MainLayout from "~/components/layouts/main-layout";
 import { type NextPageWithLayout } from "~/types/next-page-with-layout";
 import { useState, type PropsWithChildren } from "react";
-import { Input } from "~/components/atoms/my-input";
+import { Input } from "~/components/atoms/input";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 import { type Color, ColorSelect } from "~/components/generate/color-select";

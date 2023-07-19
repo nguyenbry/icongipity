@@ -4,7 +4,7 @@ import {
   // SignedIn,
   SignedOut,
 } from "@clerk/nextjs";
-import { Button } from "../atoms/my-button";
+import { Button } from "../atoms/button";
 import React from "react";
 
 const MySignInButton: React.FC = () => {
