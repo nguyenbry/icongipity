@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "~/components/atoms/dialog";
+} from "~/components/atoms/my-dialog";
 import { type Color } from "~/components/generate/color-select";
 import { type Style } from "~/components/generate/style-select";
 import { addToast, useToastStore } from "~/components/toast/use-toast-store";
