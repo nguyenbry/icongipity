@@ -35,7 +35,7 @@ export const jobRouter = createTRPCRouter({
       orderBy: [{ createdAt: "desc" }],
     });
 
-    const out = jobs.map((j) => appendImagesArrayToJob(j, userId));
+    const out = jobs.map((job) => appendImagesArrayToJob(job, userId));
     return await Promise.all(out);
   }),
 });

@@ -1,10 +1,10 @@
-import MainLayout from "~/components/layouts/MainLayout";
-import { type NextPageWithLayout } from "~/types/NextPageWithLayout";
+import MainLayout from "~/components/layouts/main-layout";
+import { type NextPageWithLayout } from "~/types/next-page-with-layout";
 import { useRouter } from "next/router";
-import { type ParsedUrlQuery } from "querystring";
+import { type ParsedUrlQuery } from "node:querystring";
 import { api } from "~/utils/api";
 import Image from "next/image";
-import { env } from "~/env.mjs";
+import { environment } from "~/environment.mjs";
 
 const SingleJobPage: NextPageWithLayout = () => {
   const { query, isReady } = useRouter();
@@ -22,7 +22,6 @@ const SingleJobPage: NextPageWithLayout = () => {
   }
 
   if (jobQuery.isSuccess) {
-    // const { prompt } = jobQuery.data;
     return (
       <div className="flex w-full flex-col px-4 py-10 lg:px-40">
         <h1 className="relative text-6xl font-black tracking-tighter dark:text-white">
@@ -34,7 +33,7 @@ const SingleJobPage: NextPageWithLayout = () => {
               key={image}
               alt="icon"
               className="m-10 rounded-xl ring-2 ring-black ring-offset-4 transition-all dark:ring-slate-700 dark:ring-offset-neutral-900"
-              src={env.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
+              src={environment.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
               width={350}
               height={350}
             />
@@ -46,7 +45,6 @@ const SingleJobPage: NextPageWithLayout = () => {
 
   if (jobQuery.isLoading) {
     return <div>loading</div>;
-  } else {
   }
 
   if (jobQuery.isError) {

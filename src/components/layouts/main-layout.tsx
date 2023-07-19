@@ -1,4 +1,4 @@
-import { type NextPageWithLayout } from "~/types/NextPageWithLayout";
+import { type NextPageWithLayout } from "~/types/next-page-with-layout";
 import { Navbar } from "../nav/navbar";
 
 const MainLayout: NonNullable<NextPageWithLayout["getLayout"]> = (page) => {

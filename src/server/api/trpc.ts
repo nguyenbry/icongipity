@@ -15,7 +15,7 @@
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
-import { prisma } from "~/server/db";
+import { prisma } from "~/server/database";
 
 /**
  * This is the actual context you will use in your router. It will be used to process every request
@@ -23,8 +23,8 @@ import { prisma } from "~/server/db";
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (opts: CreateNextContextOptions) => {
-  const { req } = opts;
+export const createTRPCContext = (options: CreateNextContextOptions) => {
+  const { req } = options;
   return {
     prisma,
     userId: getAuth(req).userId,
@@ -51,7 +51,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       data: {
         ...shape.data,
         zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
+          error.cause instanceof ZodError ? error.cause.flatten() : undefined,
       },
     };
   },

@@ -1,6 +1,6 @@
 import * as Toast from "@radix-ui/react-toast";
-import { toastVariant } from "./toastVariants";
-import { removeToast, useToastStore } from "./useToastStore";
+import { toastVariant } from "./toast-variants";
+import { removeToast, useToastStore } from "./use-toast-store";
 
 export const AllToasts: React.FC = () => {
   const toasts = useToastStore((s) => s.toasts);

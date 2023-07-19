@@ -1,2 +1,1 @@
-import SignUpPage from "~/components/pages/sign-up.page";
-export default SignUpPage;
+export { default } from "~/components/pages/sign-up.page";

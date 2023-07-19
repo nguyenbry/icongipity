@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 
 export type Tab = {
   label: string;
-  icon: (props: TablerIconsProps) => JSX.Element;
+  icon: (properties: TablerIconsProps) => JSX.Element;
 };
 
 export const Tabs = <T extends readonly Tab[]>({
@@ -62,8 +62,8 @@ export const Tabs = <T extends readonly Tab[]>({
                 : "")
             }
             key={label}
-            onMouseEnter={(e) => {
-              const tab = e.currentTarget;
+            onMouseEnter={(event_) => {
+              const tab = event_.currentTarget;
 
               // if (label !== value) {
               setHoverStyle(tab.offsetLeft + 8, tab.offsetWidth - 16);

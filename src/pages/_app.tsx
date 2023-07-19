@@ -12,7 +12,7 @@ import {
   SignedOut,
 } from "@clerk/nextjs";
 import Head from "next/head";
-import type { NextPageWithLayout } from "~/types/NextPageWithLayout";
+import type { NextPageWithLayout } from "~/types/next-page-with-layout";
 import { AllToasts } from "~/components/toast/all-toasts";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,11 +21,11 @@ const inter = Inter({ subsets: ["latin"] });
  * modify AppProps to include session from tRPC and so that
  *  it can be used with layouts
  */
-type AppPropsWithLayout = AppProps & {
+type AppPropertiesWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
+const MyApp = ({ Component, pageProps }: AppPropertiesWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   const isProtected = Component.protected;

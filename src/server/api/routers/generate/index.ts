@@ -4,7 +4,7 @@ import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { openai } from "~/server/openai";
 import s3, { BUCKET_PREFIX, getImagePathsForKey } from "~/server/s3";
 import { v4 as uuidv4 } from "uuid";
-import { env } from "~/env.mjs";
+import { environment } from "~/environment.mjs";
 import {
   Color,
   PromptGenMap,
@@ -19,7 +19,7 @@ const uploadImage = async (userId: string, jobId: string, imageB64: string) => {
 
   await s3
     .upload({
-      Bucket: env.AWS_BUCKET_NAME,
+      Bucket: environment.AWS_BUCKET_NAME,
       Key: storeItAt,
       Body: Buffer.from(imageB64, "base64"),
       ContentType: "image/png",
@@ -38,7 +38,7 @@ const generateImages = (prompt: string, nRequested: number, userId: string) =>
   });
 
 const sendNotifToDiscord = async (prompt: string) => {
-  return fetch(env.DISCORD_WEBHOOK, {
+  return fetch(environment.DISCORD_WEBHOOK, {
     method: "POST",
     body: JSON.stringify({
       content: `New job created! \`${prompt}\``,
@@ -70,7 +70,7 @@ export const generateRouter = createTRPCRouter({
 
         await sendNotifToDiscord(prompt);
 
-        const getErr = () => {
+        const getError = () => {
           return new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
             message: `There was an error generating your image${
@@ -83,7 +83,7 @@ export const generateRouter = createTRPCRouter({
         const response = await generateImages(prompt, nRequested, userId);
 
         if (response.status !== 200) {
-          throw getErr();
+          throw getError();
         }
 
         // generate a job we can update later
@@ -104,7 +104,7 @@ export const generateRouter = createTRPCRouter({
 
         if (response.data.created === 0) {
           await deleteJob(); // delete the job if no images were uploaded
-          throw getErr();
+          throw getError();
         }
 
         const uploadPromises = response.data.data.map((imageData) =>
@@ -119,7 +119,7 @@ export const generateRouter = createTRPCRouter({
 
         if (nCompleted === 0) {
           await deleteJob(); // delete the job if no images were uploaded
-          throw getErr();
+          throw getError();
         }
 
         await prisma.job.update({ where: { id: jobId }, data: { nCompleted } });
@@ -141,7 +141,7 @@ export const generateRouter = createTRPCRouter({
 
       return images.map((url: string) => {
         const parts = url.split("/");
-        const type = parts[parts.length - 1];
+        const type = parts.at(-1);
 
         if (!type) {
           throw new Error("Invalid image path");

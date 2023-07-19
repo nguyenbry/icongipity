@@ -1,7 +1,7 @@
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
-import { Button } from "~/components/atoms/Button";
+import { Button } from "~/components/atoms/button";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "~/components/atoms/Dialog";
+} from "~/components/atoms/dialog";
 import { type Color } from "~/components/generate/color-select";
 import { type Style } from "~/components/generate/style-select";
-import { addToast, useToastStore } from "~/components/toast/useToastStore";
+import { addToast, useToastStore } from "~/components/toast/use-toast-store";
 import { api } from "~/utils/api";
 
 /**
@@ -38,12 +38,12 @@ export function ConfirmationDialog({
 
   const [open, setOpen] = useState(false);
 
-  const numImagesParsed = z
+  const numberImagesParsed = z
     .number()
     .int()
     .min(1)
     .max(4)
-    .safeParse(parseInt(numImages));
+    .safeParse(Number.parseInt(numImages));
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -52,9 +52,9 @@ export function ConfirmationDialog({
           className="ml-auto mt-10 min-w-full md:min-w-0"
           variant="success"
           disabled={isLoading}
-          onClick={(e) => {
-            if (!numImagesParsed.success) {
-              e.preventDefault();
+          onClick={(event) => {
+            if (!numberImagesParsed.success) {
+              event.preventDefault();
               addIfNotAlready({
                 description: "Please select a number of images between 1 and 4",
                 title: "🔢",
@@ -65,7 +65,7 @@ export function ConfirmationDialog({
             }
 
             if (!prompt.trim()) {
-              e.preventDefault(); // don't open the confirmation dialog
+              event.preventDefault(); // don't open the confirmation dialog
               addIfNotAlready({
                 description: "Please enter a prompt",
                 title: "No prompt entered",
@@ -75,7 +75,7 @@ export function ConfirmationDialog({
               return;
             }
             if (!selectedColor) {
-              e.preventDefault();
+              event.preventDefault();
               addIfNotAlready({
                 description: "Please select a color",
                 title: "No color selected",
@@ -85,7 +85,7 @@ export function ConfirmationDialog({
               return;
             }
             if (!selectedStyle) {
-              e.preventDefault();
+              event.preventDefault();
               addIfNotAlready({
                 description: "Please select a style",
                 title: "No style selected",
@@ -101,7 +101,7 @@ export function ConfirmationDialog({
       </DialogTrigger>
       {/* prevent dialog from closing from clicking outside */}
       <DialogContent
-        onPointerDownOutside={(e) => e.preventDefault()}
+        onPointerDownOutside={(event) => event.preventDefault()}
         showClose={isLoading}
       >
         <DialogHeader>
@@ -153,7 +153,8 @@ export function ConfirmationDialog({
                       addToast({
                         description:
                           "We'll redirect you to your image" +
-                          (numImagesParsed.success && numImagesParsed.data > 1
+                          (numberImagesParsed.success &&
+                          numberImagesParsed.data > 1
                             ? "s"
                             : ""),
                         title: "✅",
@@ -173,11 +174,11 @@ export function ConfirmationDialog({
   );
 }
 
-const addIfNotAlready = (opts: Required<Parameters<typeof addToast>[0]>) => {
-  const { meta } = opts;
+const addIfNotAlready = (options: Required<Parameters<typeof addToast>[0]>) => {
+  const { meta } = options;
 
   const alreadyRanIntoThisError = useToastStore
     .getState()
     .toasts.find((t) => t.meta === meta);
-  !alreadyRanIntoThisError && addToast(opts);
+  !alreadyRanIntoThisError && addToast(options);
 };

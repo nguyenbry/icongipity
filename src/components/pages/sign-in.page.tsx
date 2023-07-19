@@ -1,6 +1,6 @@
 import React from "react";
 import { SignIn } from "@clerk/nextjs";
-import { type NextPageWithLayout } from "~/types/NextPageWithLayout";
+import { type NextPageWithLayout } from "~/types/next-page-with-layout";
 
 const SignInPage: NextPageWithLayout = () => {
   return (

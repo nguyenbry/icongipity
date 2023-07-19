@@ -2,7 +2,7 @@ import { IconLoader } from "@tabler/icons-react";
 import classNames from "classnames";
 import Image from "next/image";
 import React from "react";
-import { env } from "~/env.mjs";
+import { environment } from "~/environment.mjs";
 import { type RouterOutputs, api } from "~/utils/api";
 
 export type Style = RouterOutputs["generate"]["styleOptions"][number]["type"];
@@ -49,7 +49,7 @@ export const StyleSelect: React.FC<{
                       ? "ring-tequila-100"
                       : "ring-black group-hover:ring-tequila-100 dark:ring-slate-700"
                   )}
-                  src={env.NEXT_PUBLIC_AWS_S3_BUCKET_URL + url}
+                  src={environment.NEXT_PUBLIC_AWS_S3_BUCKET_URL + url}
                   // width={175}
                   // height={175}
                   fill

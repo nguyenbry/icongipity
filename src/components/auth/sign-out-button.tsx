@@ -1,5 +1,5 @@
 import { SignOutButton, SignedIn } from "@clerk/nextjs";
-import { Button } from "../atoms/Button";
+import { Button } from "../atoms/button";
 import React from "react";
 
 const MySignOutButton: React.FC = () => {

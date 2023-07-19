@@ -9,13 +9,13 @@ import { IconLogout, IconMenu2 } from "@tabler/icons-react";
 import Link from "next/link";
 import { links } from "./nav-links";
 import { SignOutButton, SignedIn } from "@clerk/nextjs";
-import { Button } from "../atoms/Button";
+import { Button } from "../atoms/button";
 import classNames from "classnames";
 
 const MyDropdownItem: React.FC<
   React.PropsWithChildren<{ className?: string }>
-> = (props) => {
-  const { className, ...rest } = props;
+> = (properties) => {
+  const { className, ...rest } = properties;
   return (
     <Item
       className={classNames(

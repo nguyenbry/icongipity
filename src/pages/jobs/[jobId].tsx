@@ -1,2 +1,2 @@
-import SingleJobPage from "~/components/pages/single-job.page";
-export default SingleJobPage;
+// eslint-disable-line unicorn/filename-case
+export { default } from "~/components/pages/single-job.page";

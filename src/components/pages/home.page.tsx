@@ -1,8 +1,8 @@
-import { type NextPageWithLayout } from "~/types/NextPageWithLayout";
+import { type NextPageWithLayout } from "~/types/next-page-with-layout";
 import { SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
-import { Button } from "~/components/atoms/Button";
+import { Button } from "~/components/atoms/button";
 import { IconInfoCircle } from "@tabler/icons-react";
-import MainLayout from "~/components/layouts/MainLayout";
+import MainLayout from "~/components/layouts/main-layout";
 import Link from "next/link";
 
 const HomeButton: React.FC = () => {

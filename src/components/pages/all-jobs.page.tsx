@@ -1,5 +1,5 @@
-import MainLayout from "~/components/layouts/MainLayout";
-import { type NextPageWithLayout } from "~/types/NextPageWithLayout";
+import MainLayout from "~/components/layouts/main-layout";
+import { type NextPageWithLayout } from "~/types/next-page-with-layout";
 import { api, type RouterOutputs } from "~/utils/api";
 import {
   IconLoader2,
@@ -7,7 +7,7 @@ import {
   IconList,
   IconLayoutGrid,
 } from "@tabler/icons-react";
-import { env } from "~/env.mjs";
+import { environment } from "~/environment.mjs";
 import Image from "next/image";
 import Link from "next/link";
 import { YourObjectsHeader } from "~/components/your-icons-header";
@@ -34,17 +34,17 @@ const JobCard: React.FC<RouterOutputs["job"]["get"]> = ({
         {prompt}
       </span>
       <div className="flex flex-wrap justify-evenly px-4">
-        {images.map((image, i) => (
+        {images.map((image, index) => (
           <div key={image} className="group p-8">
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href={env.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
+              href={environment.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
             >
               <Image
                 className="rounded-xl ring-2 ring-black ring-offset-4 transition-all group-hover:scale-150 group-hover:ring-teal-600 dark:ring-slate-700 dark:ring-offset-neutral-900"
-                alt={`Variation ${i + 1}: ${prompt}`}
-                src={env.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
+                alt={`Variation ${index + 1}: ${prompt}`}
+                src={environment.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
                 width={IMAGE_SIZE}
                 height={IMAGE_SIZE}
               />
@@ -102,20 +102,19 @@ const AllJobs: NextPageWithLayout = () => {
       {currentTab === "Grid View" && (
         <div className="flex flex-wrap justify-center">
           {jobs
-            .map((job) => job.images)
-            .flat()
+            .flatMap((job) => job.images)
             .map((image) => {
               return (
                 <div key={image} className="group p-8">
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={env.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
+                    href={environment.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
                   >
                     <Image
                       className="rounded-xl ring-2 ring-black ring-offset-4 transition-all group-hover:scale-150 group-hover:ring-teal-600 dark:ring-slate-700 dark:ring-offset-neutral-900"
                       alt={image}
-                      src={env.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
+                      src={environment.NEXT_PUBLIC_AWS_S3_BUCKET_URL + image}
                       width={IMAGE_SIZE}
                       height={IMAGE_SIZE}
                     />

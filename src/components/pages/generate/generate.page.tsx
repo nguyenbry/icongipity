@@ -1,7 +1,7 @@
-import MainLayout from "~/components/layouts/MainLayout";
-import { type NextPageWithLayout } from "~/types/NextPageWithLayout";
+import MainLayout from "~/components/layouts/main-layout";
+import { type NextPageWithLayout } from "~/types/next-page-with-layout";
 import { useState, type PropsWithChildren } from "react";
-import { Input } from "~/components/atoms/Input";
+import { Input } from "~/components/atoms/input";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 import { type Color, ColorSelect } from "~/components/generate/color-select";
@@ -33,7 +33,7 @@ const GeneratePage: NextPageWithLayout = () => {
   const [prompt, setPrompt] = useState("");
   const [selectedColor, setSelectedColor] = useState<Color>();
   const [selectedStyle, setSelectedStyle] = useState<Style>();
-  const [numImages, setNumImages] = useState("1");
+  const [numberImages, setNumberImages] = useState("1");
   const generateMut = api.generate.icon.useMutation();
 
   const router = useRouter();
@@ -53,7 +53,7 @@ const GeneratePage: NextPageWithLayout = () => {
           <Input
             placeholder="An angry dog"
             value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
+            onChange={(event_) => setPrompt(event_.target.value)}
             disabled={generateMut.isLoading}
           />
         </GenerateFormSection>
@@ -74,19 +74,19 @@ const GeneratePage: NextPageWithLayout = () => {
         >
           <Input
             placeholder="1"
-            value={numImages}
+            value={numberImages}
             type="number"
             step={1}
             max={4}
             min={1}
-            onChange={(e) => setNumImages(e.target.value)}
+            onChange={(event) => setNumberImages(event.target.value)}
             disabled={generateMut.isLoading}
           />
         </GenerateFormSection>
 
         <div className="flex">
           <ConfirmationDialog
-            numImages={numImages}
+            numImages={numberImages}
             prompt={prompt}
             selectedColor={selectedColor}
             selectedStyle={selectedStyle}
@@ -98,15 +98,15 @@ const GeneratePage: NextPageWithLayout = () => {
               await generateMut
                 .mutateAsync({
                   noun: prompt,
-                  nRequested: parseInt(numImages),
+                  nRequested: Number.parseInt(numberImages),
                   color: selectedColor,
                   style: selectedStyle,
                 })
                 .then((jobId) => {
                   void router.push("/jobs/" + jobId);
                 })
-                .catch((e) => {
-                  console.error(e);
+                .catch((error) => {
+                  console.error(error);
                 });
             }}
           />

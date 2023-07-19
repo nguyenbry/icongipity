@@ -1,10 +1,10 @@
 import { SignedIn } from "@clerk/nextjs";
 import { IconMoodSmileBeam } from "@tabler/icons-react";
 import Link from "next/link";
-import { Button } from "../atoms/Button";
-import { Hambuger } from "./Hamburger";
-import MySignOutButton from "../auth/MySignOutButton";
-import MySignInButton from "../auth/MySignInButton";
+import { Button } from "../atoms/button";
+import { Hambuger } from "./hamburger";
+import MySignOutButton from "../auth/sign-out-button";
+import MySignInButton from "../auth/sign-in-button";
 import { links } from "./nav-links";
 import classNames from "classnames";
 
@@ -22,12 +22,12 @@ export const Navbar: React.FC = () => {
 
       <div className="flex">
         <SignedIn>
-          {links.map(({ label, url }, i) => (
+          {links.map(({ label, url }, index) => (
             <Link
               key={label}
               href={url}
               className={classNames("hidden md:inline", {
-                "mr-2": i === links.length - 1,
+                "mr-2": index === links.length - 1,
               })}
             >
               <Button variant="transparent">{label}</Button>

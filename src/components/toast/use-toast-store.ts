@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { v4 } from "uuid";
-import { type ToastVariantOptions } from "./toastVariants";
+import { type ToastVariantOptions } from "./toast-variants";
 
 type Toast = {
   title: string;
